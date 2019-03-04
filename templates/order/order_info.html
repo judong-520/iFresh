@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block EXTJS %}
+    <script type="text/javascript" src="{% static 'app/order/js/order.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <h2>所有订单信息</h2>
+    <div id="order_info" class="container">
+    {% for order in orders %}
+    <!--订单编号-->
+    <h3>订单编号:{{ forloop.counter }}</h3>
+    <!--处理结束-->
+    <ul>
+
+        <!--所有订单信息展示-->
+            <li>
+                <!--商品名称展示-->
+                {{ order.goods.productlongname }}
+                <img src="{{ order.goods.productimg }}">
+
+                <span> <!-- 数量展示 -->{{ order.o_num }}</span>
+            </li>
+
+        <!--订单处理结束-->
+
+    </ul>
+        <!--订单id展示-->
+        {% ifequal order.o_status 0 %}
+        <button id="alipay" class="btn btn-success btn-block" orderid="">待付款</button>
+        {%  endifequal %}
+        {% ifequal order.o_status 1 %}
+        <button id="alipay" class="btn btn-success btn-block" orderid="">待收货</button>
+        {%  endifequal %}
+        {% ifequal order.o_status 2 %}
+        <button id="alipay" class="btn btn-success btn-block" orderid="">待评价</button>
+        {%  endifequal %}
+        {% ifequal order.o_status 3 %}
+        <button id="alipay" class="btn btn-success btn-block" orderid="">退款/售后</button>
+        {%  endifequal %}
+    {% endfor %}
+    </div>
+
+
+{% endblock %}

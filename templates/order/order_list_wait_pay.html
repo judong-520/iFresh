@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <h2>待付款订单列表</h2>
+
+    <ul>
+        <!--订单信息展示-->
+        {% for order in orders %}
+            <li>
+                <a href="">
+                    <h3>订单号:{{ forloop.counter }}</h3>
+                    <span>商品数量:{{ order.o_num }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        商品名称:{{ order.goods.productlongname }}
+                        <li>
+                            <img src="{{ order.goods.productimg }}" alt="">
+                        </li>
+                        <!--处理结束-->
+                </a>
+            <button id="alipay" class="btn btn-success btn-block" orderid="">付款</button>
+            </li>
+        {% endfor %}
+        <!--订单处理结束-->
+    </ul>
+
+
+{% endblock %}

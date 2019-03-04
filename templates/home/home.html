@@ -1,0 +1,186 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'app/home/home.css' %}">
+{% endblock %}
+
+{% block EXTJS %}
+    <script type="text/javascript" src="{% static 'app/home/js/home.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div id="home">
+        {#   顶部轮播       #}
+        <div class="swiper-container" id="topSwiper">
+            <div class="swiper-wrapper">
+                {% for wheel in main_wheel %}
+                <!--处理轮播banner图-->
+                    <div class="swiper-slide">
+                        <a href="#">
+                            <img src="{{ wheel.img }}" alt="">
+                        </a>
+                    </div>
+                <!-- 处理结束 -->
+                {% endfor %}
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
+
+        </div>
+        {#         导航         #}
+        <div class="topMenu">
+            <nav>
+                <ul>
+                    {% for nav in main_nav %}
+                    <!-- 处理导航数据 -->
+                        <li>
+                            <img src="{{ nav.img }}" alt="">
+                            <span>{{ nav.name }}</span>
+                        </li>
+                    <!--处理结束-->
+                    {%  endfor %}
+                </ul>
+            </nav>
+        </div>
+        {#         必购     #}
+        <div id="swiperMenu" class="swiper-container">
+
+            <ul class="swiper-wrapper">
+                {% for buy in must_buy %}
+                <!-- 处理必购商品信息 -->
+                    <li class="swiper-slide">
+                        <img src="{{ buy.img }}" alt="">
+                    </li>
+                <!-- 处理结束 -->
+                {% endfor %}
+            </ul>
+
+        </div>
+        {#          商店    #}
+        <div class="CVS">
+            {% for shop in main_shop %}
+            <!--处理第一个店铺的数据的图片-->
+                {% ifequal forloop.counter 1 %}
+                    <h2>
+                        <img src="{{ shop.img }}" alt="">
+                    </h2>
+                    <!--处理结束-->
+                {% endifequal %}
+            {% endfor %}
+            <fieldset>
+                {% for shop in main_shop %}
+                    {% if forloop.counter > 1 and forloop.counter <= 3 %}
+                        <!--处理第二个到第三个数据-->
+                            <a href="#">
+                                <img src="{{ shop.img }}" alt="">
+                            </a>
+                        <!--处理结束-->
+                    {% endif %}
+                {% endfor %}
+            </fieldset>
+            <ul>
+                {% for shop in main_shop %}
+                    {% if forloop.counter > 3 and forloop.counter <= 8 %}
+                <!--处理第四个到第八个数据-->
+                    <li>
+                        <a href="#">
+                            <img src="{{ shop.img }}" alt="">
+                            <span>{{ shop.name }}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                <!--处理结束-->
+                {% endfor %}
+            </ul>
+
+
+            <ol >
+                {% for shop in main_shop %}
+                <!--处理第八个到第十二个数据-->
+                {% if forloop.counter > 7 %}
+                    <li style="display:inline-block">
+                        <a href="#">
+                            <img src="{{ shop.img }}" alt="">
+                        </a>
+                    </li>
+                {% endif %}
+                <!--处理结束-->
+                {% endfor %}
+            </ol>
+
+
+
+        </div>
+
+        {#         主要显示 #}
+
+        <div class="mainInfo">
+            <!--商品展示-->
+            {% for show in main_show %}
+
+
+
+                <section>
+                    <h3><span></span><a href="#">更多&gt;</a></h3>
+
+                    <div>
+                        <a href="#">
+                            <img src="{{ show.img }}" alt="">
+                        </a>
+                    </div>
+
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                <img src="{{ show.img1 }}" alt="">
+                                <p class="description">
+                                    {{ show.longname1 }}
+                                </p>
+                                <span>￥{{ show.price1 }}</span>
+                                <s>￥{{ show.marketprice1 }}</s>
+                            </a>
+                            <button>
+                                <span>+</span>
+                            </button>
+                        </li>
+                       <li>
+                            <a href="#">
+                                <img src="{{ show.img2 }}" alt="">
+                                <p class="description">
+                                    {{ show.longname2 }}
+                                </p>
+                                <span>￥{{ show.price2 }}</span>
+                                <s>￥{{ show.marketprice2 }}</s>
+                            </a>
+                            <button>
+                                <span>+</span>
+                            </button>
+                        </li>
+                       <li>
+                            <a href="#">
+                                <img src="{{ show.img3 }}" alt="">
+                                <p class="description">
+                                    {{ show.longname3 }}
+                                </p>
+                                <span>￥{{ show.price3 }}</span>
+                                <s>￥{{ show.marketprice3 }}</s>
+                            </a>
+                            <button>
+                                <span>+</span>
+                            </button>
+                        </li>
+
+
+                    </ul>
+
+                </section>
+            <!--商品展示结束-->
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}

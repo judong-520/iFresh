@@ -1,0 +1,2 @@
+{{ object.productlongname }}  # 根据商品的规格建立索引
+{{ object.childcidname }}  # 根据商品的分类名称建立索引
